@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static java.math.BigDecimal.ZERO;
 import static java.util.Comparator.comparing;
+import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class Statement {
@@ -16,12 +17,13 @@ public class Statement {
     private final List<Transaction> transactions = new ArrayList<>();
 
     public String print() {
-        StringBuilder builder = new StringBuilder(HEADER);
         Map<Transaction, BigDecimal> balancesByTransaction = computeBalancesByTransaction();
-        transactions.forEach(transaction -> builder.append("\n")
-                .append(transaction.print(balancesByTransaction.get(transaction)))
-        );
-        return builder.toString();
+        return  new StringBuilder(HEADER).append(
+                    transactions.stream()
+                            .sorted(comparing(Transaction::getDate).reversed())
+                            .map(transaction -> "\n" + transaction.print(balancesByTransaction.get(transaction)))
+                            .collect(joining())
+                ).toString();
     }
 
     private Map<Transaction, BigDecimal> computeBalancesByTransaction() {
