@@ -17,6 +17,7 @@ public class Account {
         statement.add(new Transaction(amount, date));
     }
 
-    public void withdraw(BigDecimal bigDecimal, LocalDate of) {
+    public void withdraw(BigDecimal amount, LocalDate date) {
+        statement.add(new Transaction(amount.negate(), date));
     }
 }

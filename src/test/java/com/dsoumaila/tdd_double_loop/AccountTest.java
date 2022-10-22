@@ -37,4 +37,17 @@ class AccountTest {
         verify(statement).add(new Transaction(new BigDecimal("100"), of(2022, OCTOBER, 22)));
     }
 
+    @Test
+    public void should_withdraw_amount() {
+        // GIVEN
+        Statement statement = mock(Statement.class);
+        Account account = new Account(statement);
+
+        // WHEN
+        account.withdraw(new BigDecimal("100"), of(2022, OCTOBER, 22));
+
+        // THEN
+        verify(statement).add(new Transaction(new BigDecimal("100").negate(), of(2022, OCTOBER, 22)));
+    }
+
 }
