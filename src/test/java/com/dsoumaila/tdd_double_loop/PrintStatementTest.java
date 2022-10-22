@@ -12,7 +12,7 @@ public class PrintStatementTest {
     @Test
     public void should_print_statement() {
         // GIVEN
-        Account account = new Account();
+        Account account = new Account(new Statement());
         account.deposit(new BigDecimal("1000"), of(2012, JANUARY, 10));
         account.deposit(new BigDecimal("2000"), of(2012, JANUARY, 13));
         account.withdraw(new BigDecimal("500"), of(2012, JANUARY, 14));
