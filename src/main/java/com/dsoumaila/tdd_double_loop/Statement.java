@@ -10,7 +10,7 @@ public class Statement {
 
     public String print() {
         StringBuilder builder = new StringBuilder(HEADER);
-        transactions.forEach(transaction -> builder.append("\n").append(transaction.print()));
+        transactions.forEach(transaction -> builder.append("\n").append(transaction.print(null)));
         return builder.toString();
     }
 

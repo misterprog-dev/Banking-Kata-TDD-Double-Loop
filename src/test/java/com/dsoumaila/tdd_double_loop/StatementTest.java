@@ -2,6 +2,8 @@ package com.dsoumaila.tdd_double_loop;
 
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -23,7 +25,7 @@ class StatementTest {
     public void should_print_statement_with_one_transaction() {
         // GIVEN
         Transaction transaction = mock(Transaction.class);
-        when(transaction.print()).thenReturn("10/01/2012 | 1000.00 | | 1000.00");
+        when(transaction.print(new BigDecimal("1000"))).thenReturn("10/01/2012 | 1000.00 | | 1000.00");
 
         Statement statement = new Statement();
         statement.add(transaction);

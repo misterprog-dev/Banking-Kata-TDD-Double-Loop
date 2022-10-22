@@ -2,6 +2,10 @@ package com.dsoumaila.tdd_double_loop;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static java.math.BigDecimal.ZERO;
+import static java.math.RoundingMode.HALF_UP;
 
 public class Transaction {
 
@@ -13,8 +17,27 @@ public class Transaction {
         this.date = date;
     }
 
-    public String print() {
-        return null;
+    public String print(BigDecimal balance) {
+        if (ZERO.compareTo(amount) > 0){
+            return formatDateTransaction(date) + " | | " + scaleAmount(amount.abs()) + " | " + scaleAmount(balance);
+        }
+        return formatDateTransaction(date) + " | " + scaleAmount(amount) + " | | " + scaleAmount(balance);
+    }
+
+    private BigDecimal scaleAmount(BigDecimal value) {
+        return value.setScale(2, HALF_UP);
+    }
+
+    private String formatDateTransaction(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+
+    public LocalDate getDate() {
+        return date;
     }
 
     @Override
