@@ -13,7 +13,8 @@ public class Account {
         return statement.print();
     }
 
-    public void deposit(BigDecimal bigDecimal, LocalDate of) {
+    public void deposit(BigDecimal amount, LocalDate date) {
+        statement.add(new Transaction(amount, date));
     }
 
     public void withdraw(BigDecimal bigDecimal, LocalDate of) {
