@@ -25,6 +25,7 @@ class StatementTest {
     public void should_print_statement_with_one_transaction() {
         // GIVEN
         Transaction transaction = mock(Transaction.class);
+        when(transaction.getAmount()).thenReturn(new BigDecimal("1000"));
         when(transaction.print(new BigDecimal("1000"))).thenReturn("10/01/2012 | 1000.00 | | 1000.00");
 
         Statement statement = new Statement();
